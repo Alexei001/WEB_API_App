@@ -14,7 +14,7 @@ namespace WEB_API_App.Data.Services
             _context = context;
         }
 
-        public void AddPublisher(PublisherViewModel model)
+        public Publisher AddPublisher(PublisherViewModel model)
         {
             var publisher = new Publisher()
             {
@@ -22,7 +22,18 @@ namespace WEB_API_App.Data.Services
             };
             _context.Publishers.Add(publisher);
             _context.SaveChanges();
+            return publisher;
         }
+
+        public Publisher GetPublisherById(int id)
+        {
+            return _context.Publishers.FirstOrDefault(p => p.Id == id);
+        }
+        public List<Publisher> GetAllPublisher()
+        {
+            return _context.Publishers.ToList();
+        }
+
 
         public PublisherViewModelWithAuthorsAndBooks GetPublisherWithBookAuthorsById(int id)
         {
@@ -38,6 +49,7 @@ namespace WEB_API_App.Data.Services
 
             return model;
         }
+
 
         public void DeletePublisherById(int id)
         {

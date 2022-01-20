@@ -20,14 +20,42 @@ namespace WEB_API_App.Controllers
         [HttpPost("Add-Publisher")]
         public IActionResult AddPublisher([FromBody] PublisherViewModel model)
         {
-            publisherServices.AddPublisher(model);
-            return Ok();
+            var returnPub = publisherServices.AddPublisher(model);
+            return Created(nameof(AddPublisher), returnPub);
         }
+        [HttpGet("Get-All-Publisher")]
+        public IActionResult GetAllPublisher()
+        {
+            var _response = publisherServices.GetAllPublisher();
+            if (_response != null)
+            {
+                return Ok(_response);
+            }
+            return NotFound();
+        }
+        [HttpGet("Get-Publisher-by-id/{id}")]
+        public IActionResult GetPublisherById(int id)
+        {
+            var _response = publisherServices.GetPublisherById(id);
+            if (_response != null)
+            {
+                return Ok(_response);
+            }
+            return NotFound();
+        }
+
 
         [HttpGet("Get-Publisher-With-Book-Authors-By-Id/{id}")]
         public IActionResult GetPublisherWithBooksAuthorsById(int id)
         {
-            return Ok(publisherServices.GetPublisherWithBookAuthorsById(id));
+            var _response = publisherServices.GetPublisherWithBookAuthorsById(id);
+
+            if (_response != null)
+            {
+                return Ok(_response);
+            }
+            return NotFound();
+
         }
 
         [HttpDelete("Delete-publisher-by-Id/{id}")]
