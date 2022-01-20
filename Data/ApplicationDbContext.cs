@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using WEB_API_App.Data.Models;
 
 namespace WEB_API_App.Data
@@ -27,7 +28,7 @@ namespace WEB_API_App.Data
                 .WithMany(a => a.Books_Authors)
                 .HasForeignKey(b => b.BookId);
 
-
+           
         }
 
 

@@ -23,5 +23,30 @@ namespace WEB_API_App.Data.Services
             _context.Publishers.Add(publisher);
             _context.SaveChanges();
         }
+
+        public PublisherViewModelWithAuthorsAndBooks GetPublisherWithBookAuthorsById(int id)
+        {
+            var model = _context.Publishers.Where(p => p.Id == id).Select(p => new PublisherViewModelWithAuthorsAndBooks
+            {
+                PublisherName = p.Name,
+                AuthorBooks = p.Books.Select(book => new AuthorBooks()
+                {
+                    BookName = book.Title,
+                    BookAuthors = book.Books_Authors.Select(ba => ba.Author.Name).ToList()
+                }).ToList()
+            }).FirstOrDefault();
+
+            return model;
+        }
+
+        public void DeletePublisherById(int id)
+        {
+            var _publisher = _context.Publishers.FirstOrDefault(p => p.Id == id);
+            if (_publisher != null)
+            {
+                _context.Publishers.Remove(_publisher);
+                _context.SaveChanges();
+            }
+        }
     }
 }

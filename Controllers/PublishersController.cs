@@ -23,5 +23,18 @@ namespace WEB_API_App.Controllers
             publisherServices.AddPublisher(model);
             return Ok();
         }
+
+        [HttpGet("Get-Publisher-With-Book-Authors-By-Id/{id}")]
+        public IActionResult GetPublisherWithBooksAuthorsById(int id)
+        {
+            return Ok(publisherServices.GetPublisherWithBookAuthorsById(id));
+        }
+
+        [HttpDelete("Delete-publisher-by-Id/{id}")]
+        public IActionResult DeletePublisherById(int id)
+        {
+            publisherServices.DeletePublisherById(id);
+            return Ok();
+        }
     }
 }

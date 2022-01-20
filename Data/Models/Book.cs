@@ -19,7 +19,7 @@ namespace WEB_API_App.Data.Models
 
         //define relatioships
 
-        public int PublisherId { get; set; }
+        public int? PublisherId { get; set; }
         public Publisher Publisher { get; set; }
 
         public List<Book_Author> Books_Authors { get; set; }

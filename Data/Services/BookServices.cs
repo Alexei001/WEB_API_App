@@ -46,10 +46,25 @@ namespace WEB_API_App.Data.Services
 
         public List<Book> GetAllBooks()
         {
-            var allBooks = _context.Books.Include(b => b.Publisher.Name).ToList();
+            var allBooks = _context.Books.ToList();
             return allBooks;
         }
-        public Book GetBookById(int id) => _context.Books.FirstOrDefault(b => b.Id == id);
+        public BookViewModelWithAuthors GetBookById(int id)
+        {
+            var bookbyId = _context.Books.Where(b => b.Id == id).Select(model => new BookViewModelWithAuthors()
+            {
+                Title = model.Title,
+                Description = model.Description,
+                IsRead = model.IsRead,
+                DateRead = model.IsRead ? model.DateRead.Value : null,
+                Rate = model.IsRead ? model.Rate.Value : null,
+                Genre = model.Genre,
+                CoverUrl = model.CoverUrl,
+                PublisherName = model.Publisher.Name,
+                AuthorsName = model.Books_Authors.Select(ba => ba.Author.Name).ToList()
+            }).FirstOrDefault();
+            return bookbyId;
+        }
 
         public Book UpdateBookById(int id, BookViewModel model)
         {

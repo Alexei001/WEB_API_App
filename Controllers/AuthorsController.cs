@@ -22,5 +22,18 @@ namespace WEB_API_App.Controllers
             authorServices.AddAuthor(model);
             return Ok();
         }
+        
+        [HttpGet("Get-All-Authors")]
+        public IActionResult GetAllAuthors()
+        {
+            return Ok(authorServices.GetAllAuthors());
+        }
+
+
+        [HttpGet("Get-Author-by-Id/{id}")]
+        public IActionResult GetAuthorByIdWithBooks(int id)
+        {
+            return Ok(authorServices.GetAuthorByIdWithBooks(id));
+        }
     }
 }
