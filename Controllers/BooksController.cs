@@ -5,9 +5,8 @@ using WEB_API_App.Data.Services.ViewModels;
 
 namespace WEB_API_App.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class BooksController : ControllerBase
+
+    public class BooksController : Base.ControllerBase
     {
         protected readonly BookServices _bookServices;
         public BooksController(BookServices bookServices)

@@ -5,9 +5,8 @@ using WEB_API_App.Data.Services.ViewModels;
 
 namespace WEB_API_App.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class AuthorsController : ControllerBase
+
+    public class AuthorsController : Base.ControllerBase
     {
         private readonly AuthorServices authorServices;
 
@@ -22,7 +21,7 @@ namespace WEB_API_App.Controllers
             authorServices.AddAuthor(model);
             return Ok();
         }
-        
+
         [HttpGet("Get-All-Authors")]
         public IActionResult GetAllAuthors()
         {

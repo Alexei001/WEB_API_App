@@ -1,13 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
+using System;
 using Microsoft.AspNetCore.Mvc;
 using WEB_API_App.Data.Services;
 using WEB_API_App.Data.Services.ViewModels;
 
 namespace WEB_API_App.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class PublishersController : ControllerBase
+    public class PublishersController : Base.ControllerBase
     {
         private readonly PublisherServices publisherServices;
 
@@ -61,8 +60,16 @@ namespace WEB_API_App.Controllers
         [HttpDelete("Delete-publisher-by-Id/{id}")]
         public IActionResult DeletePublisherById(int id)
         {
-            publisherServices.DeletePublisherById(id);
-            return Ok();
+            try
+            {
+                publisherServices.DeletePublisherById(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+
+                return NotFound(ex.Message);
+            }
         }
     }
 }

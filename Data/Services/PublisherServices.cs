@@ -59,6 +59,10 @@ namespace WEB_API_App.Data.Services
                 _context.Publishers.Remove(_publisher);
                 _context.SaveChanges();
             }
+            else
+            {
+                throw new Exception($"The puplisher id: {id} can't be null");
+            }
         }
     }
 }
