@@ -35,9 +35,9 @@ namespace WEB_API_App
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WEB_API_App", Version = "v1" });
             });
+            //add three-commit
 
-
-            //connect DbContext
+            
             services.AddDbContext<ApplicationDbContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DeafultConnectionStrings"));
@@ -46,6 +46,8 @@ namespace WEB_API_App
             services.AddTransient<BookServices>();
             services.AddTransient<AuthorServices>();
             services.AddTransient<PublisherServices>();
+            //add one commit
+            //second commit
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
